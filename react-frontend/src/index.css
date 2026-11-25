@@ -1,0 +1,177 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Theme tokens (RGB triplets so Tailwind opacity modifiers work). */
+:root {
+  color-scheme: light;
+  --bg: 246 247 244;
+  --surface: 255 255 255;
+  --surface-2: 241 243 238;
+  --ink: 15 26 18;
+  --ink-2: 75 86 80;
+  --muted: 118 126 120;
+  --line: 225 228 221;
+  --accent: 31 122 77;
+  --accent-ink: 255 255 255;
+  --accent-soft: 227 241 232;
+  --good: 12 163 12;
+  --good-ink: 0 99 0;
+  --warn: 250 178 25;
+  --bad: 208 59 59;
+  --bad-ink: 176 40 40;
+
+  /* chart chrome */
+  --chart-grid: #e1e0d9;
+  --chart-axis: #c3c2b7;
+  --chart-text: #52514e;
+  --chart-muted: #898781;
+  --series-1: #2a78d6;
+  --chart-surface: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --bg: 13 17 15;
+    --surface: 22 27 24;
+    --surface-2: 30 37 33;
+    --ink: 238 242 238;
+    --ink-2: 190 199 193;
+    --muted: 137 146 140;
+    --line: 44 51 47;
+    --accent: 63 174 116;
+    --accent-ink: 8 20 13;
+    --accent-soft: 26 48 36;
+    --good-ink: 12 163 12;
+    --bad-ink: 230 103 103;
+
+    --chart-grid: #2c2c2a;
+    --chart-axis: #383835;
+    --chart-text: #c3c2b7;
+    --chart-muted: #898781;
+    --series-1: #3987e5;
+    --chart-surface: #161b18;
+  }
+}
+
+html,
+body {
+  background: rgb(var(--bg));
+  color: rgb(var(--ink));
+}
+
+body {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+:focus-visible {
+  outline: 2px solid rgb(var(--accent));
+  outline-offset: 2px;
+}
+
+/* ---------- OpenLayers controls, themed ---------- */
+.ol-control {
+  background: transparent;
+  padding: 0;
+}
+.ol-control button {
+  background: rgb(var(--surface));
+  color: rgb(var(--ink));
+  border: 1px solid rgb(var(--line));
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  margin: 0 0 4px 0;
+  font-size: 18px;
+  font-weight: 500;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.08);
+}
+.ol-control button:hover,
+.ol-control button:focus {
+  background: rgb(var(--surface-2));
+  color: rgb(var(--ink));
+  outline: none;
+}
+.ol-zoom {
+  top: 12px;
+  left: 12px;
+}
+.ol-scale-line {
+  left: 12px;
+  bottom: 12px;
+  background: rgb(var(--surface) / 0.9);
+  border-radius: 6px;
+  padding: 2px 6px;
+}
+.ol-scale-line-inner {
+  color: rgb(var(--ink));
+  border-color: rgb(var(--ink));
+  font-size: 11px;
+}
+.ol-attribution {
+  right: 8px;
+  bottom: 8px;
+  max-width: calc(100% - 140px);
+}
+.ol-attribution.ol-uncollapsible {
+  background: rgb(var(--surface) / 0.85);
+  border-radius: 6px 0 0 0;
+}
+.ol-attribution ul {
+  color: rgb(var(--ink-2));
+  font-size: 10px;
+  text-shadow: none;
+}
+.ol-attribution a {
+  color: rgb(var(--accent));
+}
+.ol-overviewmap {
+  left: auto;
+  right: 12px;
+  bottom: 40px;
+}
+.ol-overviewmap .ol-overviewmap-map {
+  border: 1px solid rgb(var(--line));
+  border-radius: 8px;
+  overflow: hidden;
+  width: 140px;
+  height: 110px;
+  margin-bottom: 4px;
+}
+.ol-overviewmap-box {
+  border: 2px solid #d03b3b;
+}
+
+/* ---------- print report ---------- */
+@media print {
+  @page {
+    margin: 12mm;
+  }
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  .print-break {
+    break-before: page;
+  }
+  .print-avoid {
+    break-inside: avoid;
+  }
+}
+.print-only {
+  display: none;
+}

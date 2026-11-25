@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Files</title>
+
+    <!-- ✅ Correct static CSS path -->
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <div class="upload-container">
+        <h2>Upload Your Files</h2>
+
+        <form id="uploadForm" enctype="multipart/form-data" class="upload-form">
+            
+            <div class="file-input">
+                <label for="projectName">Project Name:</label>
+                <input type="text" id="projectName" name="projectName" placeholder="Enter project name here">
+            </div>
+
+            <div class="file-input">
+                <label for="ortho">Upload Ortho (Max 250MB):</label>
+                <input type="file" id="ortho" name="ortho" accept=".tif,.tiff">
+            </div>
+
+            <div class="file-input">
+                <label for="dem">Upload DEM (Max 250MB):</label>
+                <input type="file" id="dem" name="dem" accept=".tif,.tiff">
+            </div>
+
+            <div class="file-input">
+                <label for="dtm">Upload DTM (Max 250MB):</label>
+                <input type="file" id="dtm" name="dtm" accept=".tif,.tiff">
+            </div>
+
+            <input type="button" value="Upload Files" class="upload-button" onclick="addAndUploadFiles()">
+        </form>
+    </div>
+
+    <div id="resultsContainer" class="results-container">
+        <button id="resultsButton" onclick="openResultsPage()" disabled>View Results</button>
+        <span id="statusText">Waiting for upload...</span>
+    </div>
+
+    <!-- ✅ Correct static JS path -->
+    <script src="/static/js/script_redirect.js" defer></script>
+</body>
+</html>

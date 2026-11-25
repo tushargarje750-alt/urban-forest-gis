@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tree Map</title>
+    <!-- Include OpenLayers CSS -->
+    <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css" type="text/css">
+    <!-- Include OpenLayers JavaScript -->
+    <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
+    <!-- Include your custom CSS (if any) -->
+    <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+    <div id="map" style="height: 70vh; width: 100%;"></div>
+    <div id="popup" class="ol-popup">
+        <div id="popup-content"></div>
+    </div>
+    <div id="mgrviPopup" class="mgrvi-popup-style" style="display:none;">
+        <!-- This will be populated with MGRVI info when the "i" button is clicked -->
+        <p id="mgrviValue">MGRVI: <span id="mgrviValueSpan">0</span></p>
+        <div id="mgrviScale" style="position: relative; height: 350px; width: 100%;">
+            <img id="mgrviScaleImage" src="/static/images/MGRVI_cmap.png" alt="MGRVI Scale" style="width: auto; height: 350px;" />
+            <!-- Updated redDot div to be a horizontal line instead of a dot -->
+            <div id="redDot" style="position: absolute; bottom: 0; left: 30px; width: 24px; height: 2px; background-color: red; display: none;"></div>
+            <span id="redDotText" style="position: absolute; bottom: 0; left: 35px; display: none;"></span>
+        </div>
+        <button onclick="closeMgrviPopup()">Close</button>
+    </div>
+    <div id="overviewMap" style="height: 200px; width: 200px; position: absolute; top: 10px; right: 10px;"></div>
+    <div style="position: absolute; top: 240px; right: 10px;">
+        <label for="projectSelection">Select Project:</label>
+        <select id="projectSelection" onchange="updateMapLayers()">
+            <option value="">--Select a project--</option>
+            <!-- Project names will be added here dynamically -->
+        </select>
+    </div>
+    <div class="filter-container">
+        <label for="minHeight">Min Height:</label>
+        <input type="number" id="minHeight" placeholder="Minimum Height" class="filter-input">
+    
+        <label for="maxHeight">Max Height:</label>
+        <input type="number" id="maxHeight" placeholder="Maximum Height" class="filter-input">
+    
+        <label for="healthStatus">Health Status:</label>
+        <select id="healthStatus" class="filter-select">
+            <option value="">All</option>
+            <option value="Healthy">Healthy</option>
+            <option value="Moderately Healthy">Moderately Healthy</option>
+            <option value="Poor">Poor</option>
+        </select>
+    
+        <button onclick="applyFilters()" class="apply-button">Apply Filters</button>
+    </div>
+    
+    <div class="count-display">
+        Count of trees: <span id="countDisplay">0</span>
+    </div>
+    <button id="toggleTrees" type="button">Toggle Tree Data</button> 
+    <button id="defaultViewButton" type="button">Default View</button>
+    <button id="addProjectButton" type="button">Add Project</button>
+
+    <div class="layer-toggle-container">
+        <div class="checkbox-slider">
+            <label for="chmCheckbox">CHM Data:</label>
+            <input type="checkbox" id="chmCheckbox">
+            <input type="range" id="chmOpacity" min="0" max="1" step="0.01" value="0">
+        </div>
+        <div class="checkbox-slider">
+            <label for="healthCheckbox">Health Data:</label>
+            <input type="checkbox" id="healthCheckbox">
+            <input type="range" id="healthOpacity" min="0" max="1" step="0.01" value="0">
+        </div>
+    </div>
+    <button id="logoutButton" type="button">Logout</button>
+
+
+    <script src="/static/js/script.js"></script>
+</body>
+</html>

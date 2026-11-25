@@ -1,0 +1,33 @@
+# ---- Data produced or uploaded at run time (large; GitHub rejects files > 100 MB)
+app/tif_files/
+runs/
+*.tif
+*.tiff
+
+# ---- Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.whl
+
+# ---- Node / frontend build output
+node_modules/
+dist/
+
+# ---- Local settings and secrets
+.env
+.env.local
+.env.*.local
+
+# ---- Leftovers not needed to run the project
+/ty.py
+/package.json
+/package-lock.json
+.Rhistory
+
+# ---- OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
