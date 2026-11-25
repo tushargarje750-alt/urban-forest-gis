@@ -157,19 +157,22 @@ export function Histogram({ bins, total, unit = '', digits = 1, height = 190, co
   );
 }
 
+// Scatter needs room above the plot for its "Height (m)" axis title.
+const SM = { ...M, top: 30 };
+
 /** Height vs canopy girth, one dot per tree, coloured by health. */
 export function Scatter({ trees, selectedId, onSelect, height = 240 }) {
   const [ref, width] = useWidth();
   const [hover, setHover] = useState(null);
   const pts = useMemo(() => trees.filter((t) => Number.isFinite(t.girth) && Number.isFinite(t.height)), [trees]);
-  const innerW = Math.max(0, width - M.left - M.right);
-  const innerH = height - M.top - M.bottom - 6;
+  const innerW = Math.max(0, width - SM.left - SM.right);
+  const innerH = height - SM.top - SM.bottom - 6;
   const xMax = Math.max(1, ...pts.map((t) => t.girth)) * 1.05;
   const yMax = Math.max(1, ...pts.map((t) => t.height)) * 1.05;
   const xt = niceTicks(xMax, Math.max(2, Math.floor(innerW / 70)));
   const yt = niceTicks(yMax);
-  const sx = (v) => M.left + (v / xt.at(-1)) * innerW;
-  const sy = (v) => M.top + innerH - (v / yt.at(-1)) * innerH;
+  const sx = (v) => SM.left + (v / xt.at(-1)) * innerW;
+  const sy = (v) => SM.top + innerH - (v / yt.at(-1)) * innerH;
 
   function nearest(e) {
     const r = e.currentTarget.getBoundingClientRect();
@@ -208,21 +211,21 @@ export function Scatter({ trees, selectedId, onSelect, height = 240 }) {
         >
           {yt.map((t) => (
             <g key={`y${t}`}>
-              <line x1={M.left} x2={width - M.right} y1={sy(t)} y2={sy(t)} stroke={t === 0 ? 'var(--chart-axis)' : 'var(--chart-grid)'} strokeWidth="1" shapeRendering="crispEdges" />
-              <text x={M.left - 8} y={sy(t)} dy="0.32em" textAnchor="end" fontSize={FONT} fill="var(--chart-muted)" className="tabular">
+              <line x1={SM.left} x2={width - SM.right} y1={sy(t)} y2={sy(t)} stroke={t === 0 ? 'var(--chart-axis)' : 'var(--chart-grid)'} strokeWidth="1" shapeRendering="crispEdges" />
+              <text x={SM.left - 8} y={sy(t)} dy="0.32em" textAnchor="end" fontSize={FONT} fill="var(--chart-muted)" className="tabular">
                 {t}
               </text>
             </g>
           ))}
           {xt.map((t) => (
-            <text key={`x${t}`} x={sx(t)} y={M.top + innerH + 16} textAnchor="middle" fontSize={FONT} fill="var(--chart-muted)" className="tabular">
+            <text key={`x${t}`} x={sx(t)} y={SM.top + innerH + 16} textAnchor="middle" fontSize={FONT} fill="var(--chart-muted)" className="tabular">
               {t}
             </text>
           ))}
-          <text x={width - M.right} y={height - 2} textAnchor="end" fontSize={FONT} fill="var(--chart-text)">
+          <text x={width - SM.right} y={height - 2} textAnchor="end" fontSize={FONT} fill="var(--chart-text)">
             Canopy girth (m) →
           </text>
-          <text x={4} y={M.top - 4} fontSize={FONT} fill="var(--chart-text)">
+          <text x={4} y={12} fontSize={FONT} fill="var(--chart-text)">
             Height (m)
           </text>
           {ordered.map((t) => {

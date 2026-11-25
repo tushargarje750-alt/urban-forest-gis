@@ -244,24 +244,29 @@ export function MgrviScale({ value }) {
     { from: MGRVI_POOR_BELOW, to: MGRVI_HEALTHY_FROM, key: 'Moderately Healthy' },
     { from: MGRVI_HEALTHY_FROM, to: 1, key: 'Healthy' },
   ];
+  const ticks = [-1, 0, 0.25, 1];
   return (
-    <div className="pt-5">
-      <div className="relative h-2.5 flex rounded-full overflow-hidden gap-[2px] bg-surface">
-        {zones.map((z) => (
-          <div key={z.key} style={{ width: `${pos(z.to) - pos(z.from)}%`, background: HEALTH_BY_KEY[z.key].color, opacity: 0.35 }} />
-        ))}
-      </div>
-      {Number.isFinite(value) && (
-        <div className="relative -mt-[22px] h-0" aria-hidden="true">
-          <div className="absolute -translate-x-1/2 flex flex-col items-center" style={{ left: `${pos(value)}%` }}>
-            <span className="text-[10px] font-semibold text-ink tabular leading-none mb-0.5">{num(value, 2)}</span>
+    <div className="pt-6" role="img" aria-label={`MGRVI ${num(value, 2)} on a scale from -1 to 1`}>
+      <div className="relative">
+        <div className="h-2.5 flex rounded-full overflow-hidden gap-[2px] bg-surface">
+          {zones.map((z) => (
+            <div key={z.key} style={{ width: `${pos(z.to) - pos(z.from)}%`, background: HEALTH_BY_KEY[z.key].color, opacity: 0.35 }} />
+          ))}
+        </div>
+        {Number.isFinite(value) && (
+          <div className="absolute -top-5 -translate-x-1/2 flex flex-col items-center" style={{ left: `${pos(value)}%` }}>
+            <span className="text-[10px] font-semibold text-ink tabular leading-3 mb-0.5">{num(value, 2)}</span>
             <span className="w-0.5 h-4 bg-ink rounded-full" />
           </div>
-        </div>
-      )}
-      <div className="relative h-4 mt-1 text-[10px] text-muted tabular">
-        {[-1, 0, 0.25, 1].map((t) => (
-          <span key={t} className="absolute -translate-x-1/2" style={{ left: `${pos(t)}%` }}>
+        )}
+      </div>
+      <div className="relative h-4 mt-1.5 text-[10px] text-muted tabular">
+        {ticks.map((t, i) => (
+          <span
+            key={t}
+            className={`absolute ${i === 0 ? '' : i === ticks.length - 1 ? '-translate-x-full' : '-translate-x-1/2'}`}
+            style={{ left: `${pos(t)}%` }}
+          >
             {t}
           </span>
         ))}

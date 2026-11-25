@@ -3,6 +3,21 @@
 **Live demo:** https://tushargarje750-alt.github.io/urban-forest-gis/
 (explore a sample site in the browser; no installation needed)
 
+![Results dashboard with summary figures, filters, tree crowns on the orthophoto and the selected tree's details](docs/screenshots/dashboard.jpg)
+
+<details>
+<summary>More screenshots</summary>
+
+Crowns coloured by height over the canopy height model (CHM) layer:
+
+![Map with crowns coloured by height over the canopy height layer](docs/screenshots/map-layers.jpg)
+
+Distributions of height, canopy girth and MGRVI, and height against canopy girth:
+
+![Histograms of height, canopy girth and MGRVI, and a height vs canopy girth scatter plot](docs/screenshots/charts.jpg)
+
+</details>
+
 **Abstract.** This project addresses the challenge of urban forest management by creating a GIS-based automated tool that utilizes machine learning and remote sensing technologies. The aim is to enhance tree detection in vegetated areas, which is achieved by integrating a region-growing algorithm with the YOLOv8 machine learning model. This integration significantly improves the model's tree detection capabilities. Additionally, the project uses topographic data to calculate tree heights and canopy girth and employs the Modified Green Red Vegetation Index (MGRVI) for assessing vegetation health. The outcomes demonstrate the effective application of this integrated approach in urban tree detection and analysis. A WebGIS platform is developed to visualize tree height, urban forest health, and distribution, facilitating informed decision-making for urban environmental planning and sustainability.
 
 ## What it does
