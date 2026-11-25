@@ -12,7 +12,7 @@ import {
   EMPTY_FILTERS, HEALTH, HEALTH_BY_KEY, applyFilters, buildTrees, extentOf, filtersActive, healthFromMgrvi, histogram, summarize,
 } from '../lib/trees.js';
 import { exportCsv, exportGeoJson } from '../lib/export.js';
-import { DEMO_ID, MGRVI_HEALTHY_FROM, MGRVI_POOR_BELOW } from '../config.js';
+import { BACKEND_ENABLED, DEMO_ID, MGRVI_HEALTHY_FROM, MGRVI_POOR_BELOW } from '../config.js';
 
 const DEFAULT_LAYERS = {
   basemap: true,
@@ -28,7 +28,7 @@ export default function Results({ projectId }) {
   const [load, setLoad] = useState({ state: 'loading' });
   const [reloadKey, setReloadKey] = useState(0);
 
-  const needsSignIn = !isDemo && !user;
+  const needsSignIn = !isDemo && (!user || !BACKEND_ENABLED);
   useEffect(() => {
     if (needsSignIn) return undefined;
     let cancelled = false;
@@ -51,6 +51,17 @@ export default function Results({ projectId }) {
     };
   }, [projectId, isDemo, reloadKey, needsSignIn]);
 
+  if (needsSignIn && !BACKEND_ENABLED) {
+    return (
+      <Centered>
+        <Alert level="info" title="Only the demo project is available here">
+          <p className="mt-1">
+            This online version has no processing server. <Link to={`/results/${DEMO_ID}`} className="text-accent font-medium">Open the demo project</Link>.
+          </p>
+        </Alert>
+      </Centered>
+    );
+  }
   if (needsSignIn) {
     return (
       <Centered>

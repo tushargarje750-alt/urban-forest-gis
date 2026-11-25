@@ -1,5 +1,8 @@
 # GIS Based Automated Tool for Urban Forest Management using UAV Data
 
+**Live demo:** https://tushargarje750-alt.github.io/urban-forest-gis/
+(explore a sample site in the browser; no installation needed)
+
 **Abstract.** This project addresses the challenge of urban forest management by creating a GIS-based automated tool that utilizes machine learning and remote sensing technologies. The aim is to enhance tree detection in vegetated areas, which is achieved by integrating a region-growing algorithm with the YOLOv8 machine learning model. This integration significantly improves the model's tree detection capabilities. Additionally, the project uses topographic data to calculate tree heights and canopy girth and employs the Modified Green Red Vegetation Index (MGRVI) for assessing vegetation health. The outcomes demonstrate the effective application of this integrated approach in urban tree detection and analysis. A WebGIS platform is developed to visualize tree height, urban forest health, and distribution, facilitating informed decision-making for urban environmental planning and sustainability.
 
 ## What it does

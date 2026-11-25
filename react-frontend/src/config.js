@@ -9,6 +9,9 @@ export const GEOSERVER_WMS = env.VITE_GEOSERVER_WMS ?? 'http://localhost:8080/ge
 /** Workspace name hard-coded in app/geoserver.py. Internal only (never shown); must match the backend. */
 export const GEOSERVER_WORKSPACE = 'Sharanga';
 
+/** Source code link shown on the site (set in .env.demo for the public demo). */
+export const REPO_URL = env.VITE_REPO_URL ?? '';
+
 /** Name shown in the header, browser tab and sign-in pages. */
 export const APP_NAME = 'Urban Forest GIS';
 

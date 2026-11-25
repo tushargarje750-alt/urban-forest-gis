@@ -9,7 +9,7 @@ import Results from './pages/Results.jsx';
 import Upload from './pages/Upload.jsx';
 import About from './pages/About.jsx';
 import { Login, Register } from './pages/Auth.jsx';
-import { APP_NAME, BACKEND_ENABLED, DEMO_ID } from './config.js';
+import { APP_NAME, BACKEND_ENABLED, DEMO_ID, REPO_URL } from './config.js';
 
 export default function App() {
   return (
@@ -64,6 +64,14 @@ function Shell() {
         <Link to="/about" className="hover:text-ink">
           Method
         </Link>
+        {REPO_URL && (
+          <>
+            {' · '}
+            <a href={REPO_URL} target="_blank" rel="noreferrer" className="hover:text-ink">
+              Source code
+            </a>
+          </>
+        )}
       </footer>
     </div>
   );

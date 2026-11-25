@@ -45,7 +45,12 @@ The paper reference on the Method page is in `src/config.js` (`PAPER`).
 
 ```bash
 npm run build        # static files in dist/, works from any sub-path
+npm run build:demo   # demo-only site (settings in .env.demo): no sign-in or upload
 ```
+
+The public demo at https://tushargarje750-alt.github.io/urban-forest-gis/ is built with
+`build:demo` and published by `.github/workflows/deploy-demo.yml` on every push to `main`
+that touches `react-frontend/`.
 
 ## Demo data
 

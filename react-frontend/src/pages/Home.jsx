@@ -2,7 +2,7 @@ import { Button, Card } from '../components/ui.jsx';
 import { Icon } from '../components/icons.jsx';
 import { navigate } from '../lib/router.jsx';
 import { useAuth } from '../lib/auth.jsx';
-import { BACKEND_ENABLED, DEMO_ID } from '../config.js';
+import { BACKEND_ENABLED, DEMO_ID, REPO_URL } from '../config.js';
 
 const STEPS = [
   { icon: 'upload', title: 'Upload', text: 'An RGB orthophoto plus the DEM and DTM of the same site, as GeoTIFFs from your UAV survey.' },
@@ -40,13 +40,23 @@ export default function Home() {
             <Button variant="primary" size="lg" iconRight="arrowRight" onClick={() => navigate(`/results/${DEMO_ID}`)}>
               Explore the demo
             </Button>
-            {BACKEND_ENABLED && (
+            {BACKEND_ENABLED ? (
               <Button size="lg" icon="upload" onClick={() => navigate(user ? '/upload' : '/login?next=/upload')}>
                 Analyse your own data
               </Button>
+            ) : (
+              REPO_URL && (
+                <Button size="lg" icon="code" href={REPO_URL} target="_blank" rel="noreferrer">
+                  View the source code
+                </Button>
+              )
             )}
           </div>
-          <p className="mt-3 text-xs text-muted">The demo needs no account and runs entirely in your browser.</p>
+          <p className="mt-3 text-xs text-muted">
+            {BACKEND_ENABLED
+              ? 'The demo needs no account and runs entirely in your browser.'
+              : 'This online version shows a demo site and runs entirely in your browser. Analysing new surveys needs the processing server, which you can run from the source code.'}
+          </p>
         </div>
         <HeroGraphic />
       </section>
